@@ -3,6 +3,7 @@ package A1.CMPT213A1.src;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TextMenu {
     public String menuTitle;
@@ -35,7 +36,10 @@ public class TextMenu {
         }
     }   
 
-    public void readUserInput(String userInput){
+    public void readUserInput(){
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+
         int optionsLength = menuOptions.size();
         try {
             int value = Integer.parseInt(userInput.trim()); // for leading or trailing spaces
