@@ -34,6 +34,7 @@ public class TextMenu {
         for(int i = 0; i < menuOptions.size(); i++){
             System.out.println((i+1) + ": " + menuOptions.get(i));
         }
+        System.out.println("Choose an option by entering 1-6:");
     }   
 
     public int readUserInput(){
@@ -44,6 +45,7 @@ public class TextMenu {
         try {
             int value = Integer.parseInt(userInput.trim()); // for leading or trailing spaces
             if(value >= 1 && value <= optionsLength){
+                handleUserInput(value);
                 return value;
             }
             else{
@@ -52,5 +54,47 @@ public class TextMenu {
         } catch (NumberFormatException e) {
             return -1;
         }
+    }
+
+    public void handleUserInput(int value){
+        switch (value){
+            case 1:
+                listAllItems();
+                break;
+            case 2:
+                addItem();
+                break;
+            case 3:
+                removeItem();
+                break;
+            case 4:
+                listOverdueItems();
+                break;
+            case 5:
+                listUpcomingItems();
+                break;
+            case 6:
+                break;
+        }
+    }
+
+    public void listAllItems(){
+
+    }
+
+    public void addItem(){
+
+    }
+
+    public void removeItem(){
+
+    }
+
+    public void listOverdueItems(){
+
+    }
+
+    public void listUpcomingItems(){
+
     }
 }
