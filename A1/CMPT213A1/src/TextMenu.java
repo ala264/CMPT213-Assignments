@@ -34,4 +34,19 @@ public class TextMenu {
             System.out.println(i + ": " + menuOptions.get(i));
         }
     }   
+
+    public void readUserInput(String userInput){
+        int optionsLength = menuOptions.size();
+        try {
+            int value = Integer.parseInt(userInput.trim()); // for leading or trailing spaces
+            if(value >= 1 && value <= optionsLength){
+                System.out.println("we are good" + value);
+            }
+            else{
+                System.out.println("number not in range" + value);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("we are not good" + userInput);
+        }
+    }
 }
