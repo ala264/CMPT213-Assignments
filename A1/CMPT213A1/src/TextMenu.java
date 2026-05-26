@@ -32,7 +32,7 @@ public class TextMenu {
         System.out.println("Date: " + LocalDate.now());
 
         for(int i = 0; i < menuOptions.size(); i++){
-            System.out.println(i + ": " + menuOptions.get(i));
+            System.out.println((i+1) + ": " + menuOptions.get(i));
         }
     }   
 
