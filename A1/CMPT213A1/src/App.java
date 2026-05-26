@@ -1,9 +1,12 @@
 package A1.CMPT213A1.src;
 
+import java.util.ArrayList;
+
 public class App {
+    ArrayList<LoanInformation> loanInformation = new ArrayList<>();
+    
     public static void main(String[] args) throws Exception {
         boolean done = false;
-        int counter = 0;
         TextMenu textMenu = new TextMenu("Armans super cool menu");
         textMenu.addMenuOption("List all items");
         textMenu.addMenuOption("Add an item");
@@ -13,7 +16,14 @@ public class App {
         textMenu.addMenuOption("Exit");
         do {
             textMenu.displayMenuTitle();
-            textMenu.readUserInput();
+            int userInput = textMenu.readUserInput();
+            if(userInput == -1){
+                System.out.println("\n");
+                System.out.println("Invalid selection. Enter a number between 1 and 6");
+            }
+            else if(userInput == 6){
+                done = true;
+            }
         } while (!done); 
     }
 }

@@ -36,7 +36,7 @@ public class TextMenu {
         }
     }   
 
-    public void readUserInput(){
+    public int readUserInput(){
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
@@ -44,13 +44,13 @@ public class TextMenu {
         try {
             int value = Integer.parseInt(userInput.trim()); // for leading or trailing spaces
             if(value >= 1 && value <= optionsLength){
-                System.out.println("we are good" + value);
+                return value;
             }
             else{
-                System.out.println("number not in range" + value);
+                return -1;
             }
         } catch (NumberFormatException e) {
-            System.out.println("we are not good" + userInput);
+            return -1;
         }
     }
 }
