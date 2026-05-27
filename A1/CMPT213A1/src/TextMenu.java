@@ -154,7 +154,14 @@ public class TextMenu {
 
         LoanInformation newItem = new LoanInformation(loanItemName, actualDate, publisher, nameItemLoaned);
         
-        App.loanInformation.add(newItem);
+        int i = 0;
+        for(LoanInformation loanObject: App.loanInformation){
+            if(newItem.dueDate.isBefore(loanObject.dueDate)){
+                break;
+            }
+            i = i + 1;
+        }
+        App.loanInformation.add(i, newItem);
 
         System.out.println(loanItemName + " has been added to the list.");
     }
