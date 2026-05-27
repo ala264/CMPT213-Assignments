@@ -28,7 +28,7 @@ public class TextMenu {
             System.out.print("#");
         }
         System.out.print("\n");
-        System.out.print("#" + menuTitle + "#");
+        System.out.print("# " + menuTitle + " #");
         System.out.print("\n");
         for(int i = 0; i < menuTitle.length() + 2; i++){
             System.out.print("#");
