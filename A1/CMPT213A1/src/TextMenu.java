@@ -96,17 +96,52 @@ public class TextMenu {
         String loanItemName = scanner.nextLine();
         System.out.print("\n");
 
-        System.out.print("Enter the year of the due date (e.g., 2026): ");
-        String dueDateYear = scanner.nextLine();
-        System.out.print("\n");
+        int yearDone = -1;
+        LocalDate actualDate = LocalDate.now();
+        do {
+            int dueDateYear = -1;
+            do{ 
+                System.out.print("Enter the year of the due date (e.g., 2026): ");
+                dueDateYear = Integer.parseInt(scanner.nextLine());
+                if (dueDateYear < 1900){
+                    dueDateYear = -1;
+                    System.out.println("Year must be at least 1900");
+                }
+            } while (dueDateYear == -1);
+            System.out.print("\n");
 
-        System.out.print("Enter the month of the due date (1-12): ");
-        String dueDateMonth = scanner.nextLine();
-        System.out.print("\n");
+            int dueDateMonth = -1;
+            do {
+                System.out.print("Enter the month of the due date (1-12): ");
+                dueDateMonth = Integer.parseInt(scanner.nextLine());
+                if (dueDateMonth < 1 || dueDateMonth > 12){
+                    dueDateMonth = -1;
+                    System.out.println("Month must be between 1 and 12");
+                }
+            } while (dueDateMonth == -1);
+            System.out.print("\n");
 
-        System.out.print("Enter the day of the due date (1-28/29/30/31): ");
-        String dueDateDay = scanner.nextLine();
-        System.out.print("\n");
+            int dueDateDay = -1;
+        
+            do{
+                System.out.print("Enter the day of the due date (1-28/29/30/31): ");
+                dueDateDay = Integer.parseInt(scanner.nextLine());
+                if(dueDateDay < 1 || dueDateDay > 31){
+                    dueDateDay = -1;
+                    System.out.println("Day must be bewtween 0 and 30");
+
+                }
+            } while(dueDateDay == -1);
+            System.out.print("\n");
+            try{
+                actualDate = LocalDate.of(dueDateYear, dueDateMonth, dueDateDay);
+                yearDone = 1;
+            }catch(Exception DateTimeException){
+                System.out.println("The date entered is invalid, please try again.");
+                yearDone = -1;
+            }
+        } while (yearDone == -1);
+
 
         System.out.print("Enter the publisher of the loan item: "); // publisher can be empty
         String publisher = scanner.nextLine();
@@ -116,7 +151,8 @@ public class TextMenu {
         String nameItemLoaned = scanner.nextLine();
         System.out.print("\n");
 
-        LoanInformation newItem = new LoanInformation(loanItemName, LocalDate.now(), publisher, nameItemLoaned);
+
+        LoanInformation newItem = new LoanInformation(loanItemName, actualDate, publisher, nameItemLoaned);
         
         App.loanInformation.add(newItem);
 
