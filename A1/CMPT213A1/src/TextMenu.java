@@ -1,8 +1,10 @@
 package A1.CMPT213A1.src;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -34,12 +36,18 @@ public class TextMenu {
             System.out.print("#");
         }
         System.out.print("\n");
-        System.out.println("Date: " + LocalDate.now());
+        LocalDate date = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMM dd", Locale.ENGLISH);
+
+        String formatted = date.format(formatter);
+
+        System.out.println("Today is: " + formatted);
 
         for(int i = 0; i < menuOptions.size(); i++){
             System.out.println((i+1) + ": " + menuOptions.get(i));
         }
-        System.out.println("Choose an option by entering 1-6:");
+        System.out.print("Choose an option by entering 1-6: ");
     }   
 
     public int readUserInput(){
