@@ -136,6 +136,7 @@ public class TextMenu {
             try{
                 value = Integer.parseInt(userInput.trim());
                 if(value == 0){
+                    System.out.println("Exiting removal mode.");
                     return;
                 }
                 if(value < 0 || value > App.loanInformation.size()){
