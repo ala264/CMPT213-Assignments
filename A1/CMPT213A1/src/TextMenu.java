@@ -24,13 +24,13 @@ public class TextMenu {
     }
 
     public void displayMenuTitle(){
-        for(int i = 0; i < menuTitle.length() + 2; i++){
+        for(int i = 0; i < menuTitle.length() + 4; i++){
             System.out.print("#");
         }
         System.out.print("\n");
         System.out.print("# " + menuTitle + " #");
         System.out.print("\n");
-        for(int i = 0; i < menuTitle.length() + 2; i++){
+        for(int i = 0; i < menuTitle.length() + 4; i++){
             System.out.print("#");
         }
         System.out.print("\n");
