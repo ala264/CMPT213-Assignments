@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class TextMenu {
     public String menuTitle;
@@ -62,7 +63,7 @@ public class TextMenu {
     public void handleUserInput(int value){
         switch (value){
             case 1:
-                listAllItems();
+                listAllItems(App.loanInformation);
                 break;
             case 2:
                 addItem();
@@ -81,13 +82,13 @@ public class TextMenu {
         }
     }
 
-    public void listAllItems(){
-        if(App.loanInformation.size() == 0){
+    public void listAllItems(ArrayList<LoanInformation> loanInformation){
+        if(loanInformation.size() == 0){
             System.out.println("No items to show.");
         }
         
-        for(int i = 0; i < App.loanInformation.size(); i++){
-            System.out.println("#" + (i+1) + App.loanInformation.get(i).toString());
+        for(int i = 0; i < loanInformation.size(); i++){
+            System.out.println("#" + (i+1) + loanInformation.get(i).toString());
         }
     }
 
@@ -167,7 +168,7 @@ public class TextMenu {
     }
 
     public void removeItem(){
-        listAllItems();
+        listAllItems(App.loanInformation);
         if(App.loanInformation.size() == 0){
             return;
         }
@@ -198,6 +199,12 @@ public class TextMenu {
     }
 
     public void listOverdueItems(){
+        ArrayList<LoanInformation> filteredLoanInformation =
+        App.loanInformation.stream()
+            .filter(n -> n.dueDate.isBefore(LocalDate.now()))
+            .collect(Collectors.toCollection(ArrayList::new));
+        listAllItems(filteredLoanInformation);
+
 
     }
 
