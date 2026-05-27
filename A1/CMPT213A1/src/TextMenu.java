@@ -128,18 +128,27 @@ public class TextMenu {
         if(App.loanInformation.size() == 0){
             return;
         }
-        System.out.println("Enter the item number you want to remove (0 to cancel):");
-        String userInput = scanner.nextLine();
-        try{
-            int value = Integer.parseInt(userInput.trim());
-            if(value < 0 || value > App.loanInformation.size()){
-                System.out.println("Invalid selection. Enter a number between: 0 and " + App.loanInformation.size());
-            }
-        } catch(NumberFormatException e){
-            System.out.println("Invalid selection. Enter a number between: 0 and " + App.loanInformation.size());
-        }
+        int value = -1;
 
-        LoanInformation itemRemoved = App.loanInformation.remove(Integer.parseInt(userInput.trim()) - 1);
+        do {
+            System.out.println("Enter the item number you want to remove (0 to cancel):");
+            String userInput = scanner.nextLine();
+            try{
+                value = Integer.parseInt(userInput.trim());
+                if(value == 0){
+                    return;
+                }
+                if(value < 0 || value > App.loanInformation.size()){
+                    System.out.println("Invalid selection. Enter a number between: 0 and " + App.loanInformation.size());
+                    value = -1;
+                }
+            } catch(NumberFormatException e){
+                System.out.println("Invalid selection. Enter a number between: 0 and " + App.loanInformation.size());
+                value = -1;
+            }
+        } while (value == -1);
+
+        LoanInformation itemRemoved = App.loanInformation.remove(value - 1);
 
         System.out.println(itemRemoved.name + " has been removed from the list.");
     }
