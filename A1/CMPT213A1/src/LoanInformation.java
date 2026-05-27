@@ -24,7 +24,17 @@ public class LoanInformation {
 
     @Override
     public String toString() {
-        return "\n" + name + "\n- published by: " + publisher + "\n- loanedTo: " + loanedTo + "\n- due on: " + dueDate;
+        String overdueText = "";
+
+        if (dueDate.isBefore(LocalDate.now())) {
+            long daysOverdue = LocalDate.now().toEpochDay() - dueDate.toEpochDay();
+            overdueText = " (overdue by " + daysOverdue + " day(s))";
+        }
+
+        return "\n" + name +
+           "\n- published by: " + publisher +
+           "\n- loaned to: " + loanedTo +
+           "\n- due on: " + dueDate + overdueText;
     }
 
 }
