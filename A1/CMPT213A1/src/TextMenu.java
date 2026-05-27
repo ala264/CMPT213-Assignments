@@ -8,10 +8,14 @@ import java.util.Scanner;
 public class TextMenu {
     public String menuTitle;
     public List<String> menuOptions;
+    Scanner scanner;
+
     
     public TextMenu(String menuTitle){
         this.menuTitle = menuTitle;
         this.menuOptions = new ArrayList<>();
+        this.scanner = new Scanner(System.in);
+
     }
 
     public void addMenuOption(String option){
@@ -38,7 +42,6 @@ public class TextMenu {
     }   
 
     public int readUserInput(){
-        Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
         int optionsLength = menuOptions.size();
@@ -79,15 +82,66 @@ public class TextMenu {
     }
 
     public void listAllItems(){
-
+        if(App.loanInformation.size() == 0){
+            System.out.println("No items to show.");
+        }
+        
+        for(int i = 0; i < App.loanInformation.size(); i++){
+            System.out.println("#" + (i+1) + App.loanInformation.get(i).toString());
+        }
     }
 
     public void addItem(){
+        System.out.print("Enter the name of the loan item: ");
+        String loanItemName = scanner.nextLine();
+        System.out.print("\n");
 
+        System.out.print("Enter the year of the due date (e.g., 2026): ");
+        String dueDateYear = scanner.nextLine();
+        System.out.print("\n");
+
+        System.out.print("Enter the month of the due date (1-12): ");
+        String dueDateMonth = scanner.nextLine();
+        System.out.print("\n");
+
+        System.out.print("Enter the day of the due date (1-28/29/30/31): ");
+        String dueDateDay = scanner.nextLine();
+        System.out.print("\n");
+
+        System.out.print("Enter the publisher of the loan item: "); // publisher can be empty
+        String publisher = scanner.nextLine();
+        System.out.print("\n");
+
+        System.out.print("Enter the name to which the item is loaned: ");
+        String nameItemLoaned = scanner.nextLine();
+        System.out.print("\n");
+
+        LoanInformation newItem = new LoanInformation(loanItemName, LocalDate.now(), publisher, nameItemLoaned);
+        
+        App.loanInformation.add(newItem);
+
+        System.out.println(loanItemName + " has been added to the list.");
     }
 
     public void removeItem(){
+        listAllItems();
+        if(App.loanInformation.size() == 0){
+            return;
+        }
+        System.out.println("Enter the item number you want to remove (0 to cancel):");
+        String userInput = scanner.nextLine();
+        try{
+            int value = Integer.parseInt(userInput.trim());
+            if(value < 0 || value > App.loanInformation.size()){
+                System.out.println("Invalid selection. Enter a number between: 0 and " + App.loanInformation.size());
+            }
+        } catch(NumberFormatException e){
+            System.out.println("Invalid selection. Enter a number between: 0 and " + App.loanInformation.size());
+        }
 
+        LoanInformation itemRemoved = App.loanInformation.remove(Integer.parseInt(userInput.trim()) - 1);
+
+        System.out.println(itemRemoved.name + " has been removed from the list.");
     }
 
     public void listOverdueItems(){

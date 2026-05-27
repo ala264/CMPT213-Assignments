@@ -24,7 +24,7 @@ public class LoanInformation {
 
     @Override
     public String toString() {
-        return "name: " + name + "dueDate: " + dueDate + "publisher: " + publisher + "loanedTo: " + loanedTo;
+        return "\n" + name + "\npublished by: " + publisher + "\nloanedTo: " + loanedTo + "\ndue on: " + dueDate;
     }
 
 }
