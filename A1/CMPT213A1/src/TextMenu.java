@@ -50,21 +50,29 @@ public class TextMenu {
         System.out.print("Choose an option by entering 1-6: ");
     }   
 
-    public int readUserInput(){
-        String userInput = scanner.nextLine();
+    private void displayMenuOptions(){
+        for(int i = 0; i < menuOptions.size(); i++){
+            System.out.println((i+1) + ": " + menuOptions.get(i));
+        }
+        System.out.print("Choose an option by entering 1-" + menuOptions.size() + ": ");
+    }
 
+    public int readUserInput(){
         int optionsLength = menuOptions.size();
-        try {
-            int value = Integer.parseInt(userInput.trim()); // for leading or trailing spaces
-            if(value >= 1 && value <= optionsLength){
-                handleUserInput(value);
-                return value;
+        while(true){
+            String userInput = scanner.nextLine();
+            try {
+                int value = Integer.parseInt(userInput.trim());
+                if(value >= 1 && value <= optionsLength){
+                    handleUserInput(value);
+                    return value;
+                }
+                System.out.println("Invalid selection. Enter a number between 1 and " + optionsLength);
+                displayMenuOptions();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Enter a number between 1 and " + optionsLength);
+                displayMenuOptions();
             }
-            else{
-                return -1;
-            }
-        } catch (NumberFormatException e) {
-            return -1;
         }
     }
 
@@ -92,12 +100,13 @@ public class TextMenu {
 
     public void listAllItems(ArrayList<LoanInformation> loanInformation){
         if(loanInformation.size() == 0){
-            System.out.println("No items to show.");
+            System.out.println("No items to show.\n");
         }
         
         for(int i = 0; i < loanInformation.size(); i++){
-            System.out.println("#" + (i+1) + loanInformation.get(i).toString());
+            System.out.println("\n#" + (i+1) + loanInformation.get(i).toString());
         }
+        System.out.println("\n");
     }
 
     public void addItem(){
@@ -172,7 +181,7 @@ public class TextMenu {
         }
         App.loanInformation.add(i, newItem);
 
-        System.out.println(loanItemName + " has been added to the list.");
+        System.out.println(loanItemName + " has been added to the list.\n");
     }
 
     public void removeItem(){

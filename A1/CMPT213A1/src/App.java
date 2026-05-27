@@ -17,11 +17,7 @@ public class App {
         do {
             textMenu.displayMenuTitle();
             int userInput = textMenu.readUserInput();
-            if(userInput == -1){
-                System.out.println("\n");
-                System.out.println("Invalid selection. Enter a number between 1 and 6");
-            }
-            else if(userInput == 6){
+            if(userInput == 6){
                 System.out.println("Saving the list to ./list.json...\n \nThanks for using Loan Items Tracker!");
                 done = true;
             }
