@@ -204,11 +204,13 @@ public class TextMenu {
             .filter(n -> n.dueDate.isBefore(LocalDate.now()))
             .collect(Collectors.toCollection(ArrayList::new));
         listAllItems(filteredLoanInformation);
-
-
     }
 
     public void listUpcomingItems(){
-
+        ArrayList<LoanInformation> filteredLoanInformation =
+            App.loanInformation.stream()
+                .filter(n -> !n.dueDate.isBefore(LocalDate.now()))
+                .collect(Collectors.toCollection(ArrayList::new));
+        listAllItems(filteredLoanInformation);
     }
 }
